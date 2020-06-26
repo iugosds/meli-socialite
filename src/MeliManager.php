@@ -136,6 +136,24 @@ class MeliManager
         return $exec;
     }
     /**
+     * Execute a MULTIPART POST Request (with files)
+     * Body will not be json encoded
+     *
+     * @param string $body
+     * @param array $params
+     * @return mixed
+     */
+    public function multipartPost($path, $body = null, $params = array()) {
+        $opts = array(
+            CURLOPT_HTTPHEADER => array("Content-Type:multipart/form-data"),
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $body
+        );
+
+        $exec = $this->execute($path, $opts, $params);
+        return $exec;
+    }
+    /**
      * Execute a PUT Request
      *
      * @param string $path
