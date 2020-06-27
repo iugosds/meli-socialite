@@ -204,6 +204,21 @@ class MeliManager
         return $exec;
     }
     /**
+     * Execute a GET Request and return the content not modified
+     *
+     * @param string $path
+     * @param array $params
+     * @return mixed
+     */
+    public function getRaw($path, $params = null)
+    {
+        $uri = $this->make_path($path, $params);
+        $ch = curl_init($uri);
+        curl_setopt_array($ch, self::$CURL_OPTS);
+
+        return curl_exec($ch);
+    }
+    /**
      * Execute all requests and returns the json body and headers
      *
      * @param string $path
